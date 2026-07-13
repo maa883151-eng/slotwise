@@ -2,7 +2,7 @@
 
 > A booking/scheduling app — live availability, double-booking-proof slots, and calendar export.
 
-**Live demo:** _(added after deploy)_ — admin panel at `/admin`, password `admin1234`.
+**Live demo:** [slotwise-eosin.vercel.app](https://slotwise-eosin.vercel.app) — admin panel at `/admin`, password `admin1234`.
 
 ## What it does
 
