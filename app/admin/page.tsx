@@ -57,11 +57,11 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 p-6 gap-6">
-      <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">Admin — SlotWise</h1>
+    <div className="flex flex-1 flex-col bg-[#fbf9f6] p-8 gap-6">
+      <h1 className="text-xl font-semibold text-zinc-900">Admin — SlotWise</h1>
 
-      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
-        <h2 className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Bookings</h2>
+      <section className="rounded-2xl bg-white p-5 shadow-[0_2px_10px_rgba(30,25,15,0.05)]">
+        <h2 className="text-sm font-semibold text-zinc-800 mb-3">Bookings</h2>
         {loading ? (
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : bookings.length === 0 ? (
@@ -69,7 +69,7 @@ export default function AdminPage() {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-zinc-500 dark:text-zinc-400 border-b border-zinc-200 dark:border-zinc-800">
+              <tr className="text-left text-xs text-zinc-500 border-b border-zinc-100">
                 <th className="py-2 pr-3 font-medium">When</th>
                 <th className="py-2 pr-3 font-medium">Client</th>
                 <th className="py-2 pr-3 font-medium">Notes</th>
@@ -79,27 +79,25 @@ export default function AdminPage() {
             </thead>
             <tbody>
               {bookings.map((b) => (
-                <tr key={b.id} className="border-b border-zinc-100 dark:border-zinc-800 last:border-0">
-                  <td className="py-2 pr-3 text-zinc-800 dark:text-zinc-200">{b.date} {b.time}</td>
-                  <td className="py-2 pr-3">
-                    <p className="text-zinc-800 dark:text-zinc-200">{b.name}</p>
+                <tr key={b.id} className="border-b border-zinc-50 last:border-0">
+                  <td className="py-2.5 pr-3 text-zinc-800">{b.date} {b.time}</td>
+                  <td className="py-2.5 pr-3">
+                    <p className="text-zinc-800">{b.name}</p>
                     <p className="text-xs text-zinc-400">{b.email}</p>
                   </td>
-                  <td className="py-2 pr-3 text-zinc-500 dark:text-zinc-400 max-w-[200px] truncate">{b.notes || "—"}</td>
-                  <td className="py-2 pr-3">
+                  <td className="py-2.5 pr-3 text-zinc-500 max-w-[200px] truncate">{b.notes || "—"}</td>
+                  <td className="py-2.5 pr-3">
                     <span
-                      className={`rounded-full px-2 py-0.5 text-xs ${
-                        b.status === "confirmed"
-                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                          : "bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        b.status === "confirmed" ? "bg-teal-800/10 text-teal-800" : "bg-zinc-100 text-zinc-500"
                       }`}
                     >
                       {b.status}
                     </span>
                   </td>
-                  <td className="py-2 text-right">
+                  <td className="py-2.5 text-right">
                     {b.status === "confirmed" && (
-                      <button onClick={() => cancel(b.id)} className="text-xs text-red-600 hover:underline">
+                      <button onClick={() => cancel(b.id)} className="text-xs font-medium text-red-500 hover:underline">
                         Cancel
                       </button>
                     )}
@@ -111,16 +109,16 @@ export default function AdminPage() {
         )}
       </section>
 
-      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
-        <h2 className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Blocked dates</h2>
+      <section className="rounded-2xl bg-white p-5 shadow-[0_2px_10px_rgba(30,25,15,0.05)]">
+        <h2 className="text-sm font-semibold text-zinc-800 mb-3">Blocked dates</h2>
         <form onSubmit={addBlockedDate} className="flex gap-2 mb-3">
           <input
             type="date"
             value={newBlockDate}
             onChange={(e) => setNewBlockDate(e.target.value)}
-            className="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 px-3 py-2 text-sm"
+            className="rounded-[10px] border-0 bg-zinc-50 px-3.5 py-2 text-sm"
           />
-          <button type="submit" className="rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 text-sm font-medium">
+          <button type="submit" className="rounded-full bg-teal-800 text-white px-4 py-2 text-sm font-semibold hover:bg-teal-900">
             Block day
           </button>
         </form>
@@ -129,7 +127,7 @@ export default function AdminPage() {
         ) : (
           <ul className="flex flex-wrap gap-2">
             {blockedDates.map((date) => (
-              <li key={date} className="flex items-center gap-2 rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-sm text-zinc-700 dark:text-zinc-300">
+              <li key={date} className="flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700">
                 {date}
                 <button onClick={() => unblock(date)} className="text-zinc-400 hover:text-red-600">×</button>
               </li>

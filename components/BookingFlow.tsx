@@ -55,22 +55,22 @@ export function BookingFlow({ dates }: { dates: DateOption[] }) {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-7">
       <section>
-        <h2 className="mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">1. Pick a day</h2>
+        <h2 className="mb-2.5 text-[13px] font-semibold text-zinc-700">1. Pick a day</h2>
         <div className="flex gap-2 overflow-x-auto pb-2">
           {dates.map((d) => (
             <button
               key={d.date}
               onClick={() => setSelectedDate(d.date)}
-              className={`flex flex-col items-center rounded-xl border px-3 py-2 min-w-[64px] text-sm ${
+              className={`flex flex-col items-center rounded-xl px-3 py-2.5 min-w-[64px] text-sm ${
                 selectedDate === d.date
-                  ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300"
-                  : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"
+                  ? "bg-teal-800 text-white"
+                  : "bg-white text-zinc-700 shadow-[0_1px_4px_rgba(30,25,15,0.06)]"
               }`}
             >
-              <span className="text-xs text-zinc-400">{d.weekday}</span>
-              <span className="font-medium">{d.label}</span>
+              <span className={`text-[10.5px] ${selectedDate === d.date ? "text-white/75" : "text-zinc-400"}`}>{d.weekday}</span>
+              <span className="font-semibold">{d.label}</span>
             </button>
           ))}
         </div>
@@ -78,7 +78,7 @@ export function BookingFlow({ dates }: { dates: DateOption[] }) {
 
       {selectedDate && (
         <section>
-          <h2 className="mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">2. Pick a time</h2>
+          <h2 className="mb-2.5 text-[13px] font-semibold text-zinc-700">2. Pick a time</h2>
           {loadingSlots ? (
             <p className="text-sm text-zinc-400">Loading availability…</p>
           ) : slots.length === 0 ? (
@@ -89,10 +89,10 @@ export function BookingFlow({ dates }: { dates: DateOption[] }) {
                 <button
                   key={time}
                   onClick={() => setSelectedTime(time)}
-                  className={`rounded-lg border px-2 py-1.5 text-sm ${
+                  className={`rounded-[10px] px-3 py-2.5 text-sm font-medium ${
                     selectedTime === time
-                      ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300"
-                      : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"
+                      ? "bg-teal-800 text-white"
+                      : "bg-white text-zinc-700 shadow-[0_1px_4px_rgba(30,25,15,0.06)]"
                   }`}
                 >
                   {time}
@@ -105,14 +105,14 @@ export function BookingFlow({ dates }: { dates: DateOption[] }) {
 
       {selectedTime && (
         <section>
-          <h2 className="mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">3. Your details</h2>
-          <form onSubmit={submit} className="flex flex-col gap-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
+          <h2 className="mb-2.5 text-[13px] font-semibold text-zinc-700">3. Your details</h2>
+          <form onSubmit={submit} className="flex flex-col gap-2.5 rounded-2xl bg-white p-5 shadow-[0_2px_10px_rgba(30,25,15,0.06)]">
             <input
               required
               placeholder="Full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 px-3 py-2 text-sm"
+              className="rounded-[10px] border-0 bg-zinc-50 px-3.5 py-2.5 text-sm"
             />
             <input
               required
@@ -120,20 +120,20 @@ export function BookingFlow({ dates }: { dates: DateOption[] }) {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 px-3 py-2 text-sm"
+              className="rounded-[10px] border-0 bg-zinc-50 px-3.5 py-2.5 text-sm"
             />
             <textarea
               placeholder="Anything we should know? (optional)"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
-              className="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 px-3 py-2 text-sm"
+              className="rounded-[10px] border-0 bg-zinc-50 px-3.5 py-2.5 text-sm"
             />
             {error && <p className="text-sm text-red-600">{error}</p>}
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-2 text-sm font-medium disabled:opacity-50"
+              className="rounded-[10px] bg-teal-800 text-white py-2.5 text-sm font-semibold hover:bg-teal-900 disabled:opacity-50"
             >
               {submitting ? "Booking…" : `Confirm ${selectedDate} at ${selectedTime}`}
             </button>
